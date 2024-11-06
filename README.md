@@ -45,3 +45,22 @@ We experimented with:
 - Sky Colors: Change `SKY_COLORS` to customize the sky's color transitions.
 - Car Speed: Adjust `car_speed` to change how fast the car moves.
 - Building Sizes: Modify building dimensions and spacing to change the cityscape look.
+
+
+##  Tree 
+
+`
+│   main.py
+│
+├───.idea
+│   │   drawing.py.iml
+│   │   misc.xml
+│   │   modules.xml
+│   │   vcs.xml
+│   │   workspace.xml
+│   │
+│   └───inspectionProfiles
+│           profiles_settings.xml
+` 
+
+
