@@ -1,9 +1,9 @@
 # Dynamic Sunset Cityscape
-This project is a Pygame-based animated cityscape that simulates a sunset scene with dynamic elements. It includes a transitioning sky color, a setting sun, moving buildings, and a Lamborghini-style car cruising across the scene. The animation creates a smooth and visually appealing depiction of a sunset in a bustling city.
+This project is a Pygame-based animated cityscape that simulates a sunset scene with dynamic elements. It includes a transitioning sky color, a setting sun, moving buildings, and a car cruising across the scene. The animation creates a smooth and visually appealing depiction of a sunset in a bustling city.
 
 ## Features
 - Gradient Sky Transition: The sky color changes through four stages, from daylight to twilight, based on the sun's position.
-Setting Sun Animation: The sun gradually moves downward, simulating a sunset.
+- Setting Sun Animation: The sun gradually moves downward, simulating a sunset.
 - Procedurally Generated Buildings: Buildings of random heights and widths scroll across the screen to give a dynamic, moving cityscape.
 - Animated Car: A red Lamborghini-style car continuously drives across the road and wraps around the screen when it reaches the edge.
 - Smooth 60 FPS Animation: The animation maintains a smooth framerate for a realistic feel.
