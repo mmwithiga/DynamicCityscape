@@ -47,9 +47,9 @@ We experimented with:
 - Building Sizes: Modify building dimensions and spacing to change the cityscape look.
 
 
-##  Tree 
+## **Project Structure:**
 
-``
+```
 │   main.py
 │
 ├───.idea
@@ -61,6 +61,6 @@ We experimented with:
 │   │
 │   └───inspectionProfiles
 │           profiles_settings.xml
-``
+```
 
 
