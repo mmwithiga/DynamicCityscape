@@ -49,7 +49,7 @@ We experimented with:
 
 ##  Tree 
 
-`
+``
 │   main.py
 │
 ├───.idea
@@ -61,6 +61,6 @@ We experimented with:
 │   │
 │   └───inspectionProfiles
 │           profiles_settings.xml
-` 
+``
 
 
