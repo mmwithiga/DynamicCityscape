@@ -5,119 +5,182 @@ import random
 pygame.init()
 
 # Display setup
-WIDTH, HEIGHT = 800, 600  # Screen dimensions
+WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Dynamic Sunset Cityscape")
+pygame.display.set_caption("Dynamic Sunset, Moonrise, and Cityscape")
 
-# Color stages for the sky (day to twilight)
+# Colors
 SKY_COLORS = [
-    ((135, 206, 235), (176, 224, 230)),  # Daylight blues
-    ((255, 153, 51), (255, 204, 153)),  # Sunset oranges
-    ((255, 102, 102), (153, 50, 204)),  # Intense red and purple
-    ((25, 25, 112), (0, 0, 139))  # Twilight blues
+    ((135, 206, 235), (176, 224, 230)),  # Daylight
+    ((255, 153, 51), (255, 204, 153)),  # Sunset
+    ((25, 25, 112), (0, 0, 139))        # Night
+]
+SUN_COLOR = (255, 140, 0)
+MOON_COLOR = (200, 200, 255)
+WINDOW_COLOR = (255, 223, 186)
+ROAD_COLOR = (50, 50, 50)
+CAR_WHEEL_COLOR = (30, 30, 30)
+
+# Initialize buildings
+buildings = [
+    {
+        "x": i * 150,
+        "width": random.randint(60, 100),
+        "height": random.randint(200, 400),
+        "color": (random.randint(50, 150), random.randint(50, 150), random.randint(50, 150))
+    }
+    for i in range(6)
 ]
 
-# Colors for other elements
-SUN_COLOR = (255, 140, 0)  # Orange sun
-WINDOW_COLOR = (255, 223, 186)  # Warm light windows
-ROAD_COLOR = (50, 50, 50)  # Dark road
-CAR_BODY_COLOR = (200, 0, 0)  # Lamborghini red for the car body
-CAR_WHEEL_COLOR = (30, 30, 30)  # Dark gray for car wheels
+# Initialize clouds
+clouds = [
+    {"x": random.randint(0, WIDTH), "y": random.randint(50, 300), "size": random.randint(50, 100)}
+    for _ in range(5)
+]
 
-# Car speed across the screen
-car_speed = 1.5
+# Initialize cars
+cars = [
+    {
+        "x": random.randint(-800, 800),
+        "speed": random.uniform(1, 3),
+        "color": (random.randint(50, 255), random.randint(50, 255), random.randint(50, 255))
+    }
+    for _ in range(5)
+]
 
-
-# Function to draw gradient sky transitioning from top color to bottom color
-def draw_sky(sky_top, sky_bottom):
-    for i in range(HEIGHT):  # Loop over the screen height
-        ratio = i / HEIGHT  # Calculate the ratio for blending colors
+# Gradient sky
+def draw_sky(top_color, bottom_color):
+    for y in range(HEIGHT):
+        ratio = y / HEIGHT
         color = (
-            int(sky_top[0] * (1 - ratio) + sky_bottom[0] * ratio),
-            int(sky_top[1] * (1 - ratio) + sky_bottom[1] * ratio),
-            int(sky_top[2] * (1 - ratio) + sky_bottom[2] * ratio),
+            int(top_color[0] * (1 - ratio) + bottom_color[0] * ratio),
+            int(top_color[1] * (1 - ratio) + bottom_color[1] * ratio),
+            int(top_color[2] * (1 - ratio) + bottom_color[2] * ratio),
         )
-        pygame.draw.line(screen, color, (0, i), (WIDTH, i))  # Draw each line with the blended color
+        pygame.draw.line(screen, color, (0, y), (WIDTH, y))
 
+# Draw clouds
+def draw_clouds(stage):
+    for cloud in clouds:
+        x, y, size = cloud["x"], cloud["y"], cloud["size"]
+        cloud_color = (240, 240, 240) if stage < 2 else (105, 105, 105)
+        pygame.draw.ellipse(screen, cloud_color, (x, y, size, size // 2))
+        pygame.draw.ellipse(screen, cloud_color, (x - size // 2, y + size // 4, size, size // 2))
+        pygame.draw.ellipse(screen, cloud_color, (x + size // 2, y + size // 4, size, size // 2))
 
-# Function to draw the setting sun at a specific y-position
-def draw_sun(y_position):
-    pygame.draw.circle(screen, SUN_COLOR, (WIDTH // 2, y_position), 60)  # Sun is centered horizontally
+# Draw sun
+def draw_sun(y):
+    pygame.draw.circle(screen, SUN_COLOR, (WIDTH // 2, y), 60)
 
+# Draw moon
+def draw_moon(x, y):
+    pygame.draw.circle(screen, MOON_COLOR, (x, y), 50)
 
-# Function to draw stylized buildings with random heights, widths, and organized windows
-def draw_buildings(buildings):
+# Draw buildings
+def draw_buildings():
     for building in buildings:
-        x, building_width, building_height, building_color = building["x"], building["width"], building["height"], \
-        building["color"]
-        pygame.draw.rect(screen, building_color, (x, HEIGHT - building_height, building_width, building_height))
+        x, width, height, color = building["x"], building["width"], building["height"], building["color"]
+        pygame.draw.rect(screen, color, (x, HEIGHT - height, width, height))
+        for i in range(1, height // 40):
+            for j in range(2, width // 30):
+                win_x = x + j * 30
+                win_y = HEIGHT - height + i * 40
+                pygame.draw.rect(screen, WINDOW_COLOR, (win_x, win_y, 20, 20))
 
-        # Draw windows in rows and columns on each building
-        for i in range(1, building_height // 40):
-            for j in range(2, building_width // 30):
-                win_x = x + j * 30  # X-coordinate of window
-                win_y = HEIGHT - building_height + i * 40  # Y-coordinate of window
-                pygame.draw.rect(screen, WINDOW_COLOR, (win_x, win_y, 20, 20))  # Each window is 20x20 pixels
+# Draw car
+def draw_car(car):
+    x, color = car["x"], car["color"]
+    # Body
+    pygame.draw.rect(screen, color, (x, HEIGHT - 80, 80, 30))
+    pygame.draw.polygon(screen, color, [
+        (x + 10, HEIGHT - 80),
+        (x + 70, HEIGHT - 80),
+        (x + 60, HEIGHT - 100),
+        (x + 20, HEIGHT - 100)
+    ])
+    # Wheels
+    pygame.draw.circle(screen, CAR_WHEEL_COLOR, (x + 20, HEIGHT - 50), 10)
+    pygame.draw.circle(screen, CAR_WHEEL_COLOR, (x + 60, HEIGHT - 50), 10)
 
+# Main loop
+clock = pygame.time.Clock()
+sun_y = 100
+moon_x, moon_y = -50, 50  # Starting position of the moon in the northwest
+sky_stage = 0
+moon_rising = False
+new_day = False
 
-# Function to draw a car at a given x-position
-def draw_car(x_position):
-    # Draw car body (rectangle for main body, polygon for the top)
-    pygame.draw.rect(screen, CAR_BODY_COLOR, (x_position, HEIGHT - 80, 80, 30))
-    pygame.draw.polygon(screen, CAR_BODY_COLOR, [(x_position + 10, HEIGHT - 80), (x_position + 70, HEIGHT - 80),
-                                                 (x_position + 60, HEIGHT - 100), (x_position + 20, HEIGHT - 100)])
-
-    # Draw car wheels as small circles
-    pygame.draw.circle(screen, CAR_WHEEL_COLOR, (x_position + 20, HEIGHT - 50), 10)  # Front wheel
-    pygame.draw.circle(screen, CAR_WHEEL_COLOR, (x_position + 60, HEIGHT - 50), 10)  # Rear wheel
-
-
-# Main animation loop
-clock = pygame.time.Clock()  # Set up the clock for a smooth frame rate
-sun_y = 100  # Initial position of the sun
-car_x = -100  # Initial x-position of the car, starts off-screen
-
-# Initialize buildings with random heights, widths, colors, and spaced across the screen
-buildings = [{"x": i * 150 + WIDTH, "width": random.randint(60, 100), "height": random.randint(200, 400),
-              "color": (random.randint(50, 150), random.randint(50, 150), random.randint(50, 150))}  # Random color
-             for i in range(6)]
 running = True
-sky_stage = 0  # Start with the first color stage
-stage_thresholds = [100, 300, 500]  # Heights where the sky color transitions to the next stage
-
 while running:
-    for event in pygame.event.get():  # Event loop to check for quit
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # Select colors based on sun's height (sky_stage advances as the sun descends)
-    if sun_y > stage_thresholds[sky_stage] and sky_stage < len(SKY_COLORS) - 1:
-        sky_stage += 1  # Move to the next sky color stage
-    sky_top, sky_bottom = SKY_COLORS[sky_stage]  # Get the current sky colors
+    # Transition sky colors
+    if sun_y > HEIGHT // 2 and sky_stage < 1:
+        sky_stage = 1
+    elif sun_y >= HEIGHT and sky_stage < 2:
+        sky_stage = 2
+        moon_rising = True
 
-    # Draw the sunset background and cityscape elements
-    draw_sky(sky_top, sky_bottom)  # Draw gradient sky
-    draw_sun(sun_y)  # Draw the setting sun
-    draw_buildings(buildings)  # Draw buildings
-    pygame.draw.rect(screen, ROAD_COLOR, (0, HEIGHT - 40, WIDTH, 40))  # Draw road at the bottom
-    draw_car(car_x)  # Draw car moving across the screen
+    if moon_rising and moon_y > HEIGHT:
+        moon_rising = False
+        new_day = True  # Switch to a new day
 
-    # Update positions for animation
-    sun_y += 0.1 if sun_y < HEIGHT else 0  # Sun slowly moves downward
-    car_x = (car_x + car_speed) % WIDTH  # Car moves right and wraps to the left after crossing the screen
+    if new_day:
+        sun_y = 100  # Reset sun position
+        moon_x, moon_y = -50, 50  # Reset moon position
+        sky_stage = 0  # Reset sky to daylight
+        new_day = False  # Reset day cycle flag
 
-    # Move buildings leftward at the same speed as the car
+    # Get current sky colors
+    sky_top, sky_bottom = SKY_COLORS[sky_stage]
+
+    # Draw elements
+    draw_sky(sky_top, sky_bottom)
+    draw_clouds(sky_stage)
+    if sun_y < HEIGHT:
+        draw_sun(sun_y)
+    if moon_rising:
+        draw_moon(moon_x, moon_y)
+    draw_buildings()
+    pygame.draw.rect(screen, ROAD_COLOR, (0, HEIGHT - 40, WIDTH, 40))  # Road
+
+    # Draw and move cars
+    for car in cars:
+        draw_car(car)
+        car["x"] = (car["x"] + car["speed"]) % WIDTH
+
+    # Update positions
+    if sun_y < HEIGHT:
+        sun_y += 0.5
+    if moon_rising:
+        moon_x += 1  # Move right
+        moon_y += 0.5  # Move downward
+
+    # Move clouds
+    for cloud in clouds:
+        cloud["x"] -= 0.5
+        if cloud["x"] + cloud["size"] < 0:
+            cloud["x"] = WIDTH
+            cloud["y"] = random.randint(50, 300)
+            cloud["size"] = random.randint(50, 100)
+
+    # Move buildings with the car
     for building in buildings:
-        building["x"] -= car_speed  # Shift building left
-        if building["x"] < -building["width"]:  # If building goes off-screen, reset it on the right
-            building["x"] = WIDTH + random.randint(50, 150)  # Place it randomly off-screen to the right
-            building["height"] = random.randint(200, 400)  # Randomize new building height
-            building["width"] = random.randint(60, 100)  # Randomize new building width
+        building["x"] -= 1.5
+        if building["x"] < -building["width"]:
+            building["x"] = WIDTH + random.randint(50, 150)
+            building["width"] = random.randint(60, 100)
+            building["height"] = random.randint(200, 400)
             building["color"] = (
-            random.randint(50, 150), random.randint(50, 150), random.randint(50, 150))  # New random color
+                random.randint(50, 150),
+                random.randint(50, 150),
+                random.randint(50, 150)
+            )
 
-    pygame.display.flip()  # Update the screen with new drawings
-    clock.tick(60)  # Maintain smooth 60 frames per second
+    # Refresh screen
+    pygame.display.flip()
+    clock.tick(60)
 
-# Quit Pygame when the loop ends
 pygame.quit()
