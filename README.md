@@ -65,10 +65,6 @@ This project is a visually engaging animation of a dynamic cityscape, complete w
 
 --- 
 
-
 ## **License**  
-This project is licensed under the MIT License. You are free to use, modify, and distribute this project, provided that you include a copy of the license and credit the original authors.
 
-For more details, see the LICENSE file included in the repository.
-
----
+This project is licensed under the MIT License. You are free to use, modify, and distribute this software, provided that the original license is included.
