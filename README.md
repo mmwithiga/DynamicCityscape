@@ -55,7 +55,7 @@ This project is a visually engaging animation of a dynamic cityscape. It include
 
 ## **Acknowledgments**  
 - This project uses the Pygame library for creating animations.  
-- Special thanks to the group of 5 who collaborated to make this project possible!  
+- Special thanks to the group 2 members who collaborated to make this project possible!  
 
 --- 
 
