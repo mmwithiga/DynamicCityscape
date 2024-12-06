@@ -1,22 +1,28 @@
+# **Dynamic City Animation**  
+
+## **Table of Contents**  
+1. [Overview](#overview)  
+2. [Features](#features)  
+3. [Setup Instructions](#setup-instructions)  
+4. [How to Play](#how-to-play)  
+5. [Contributions](#contributions)  
+6. [License](#license)  
 
 ---
 
-# **Dynamic City Animation**  
-
 ## **Overview**  
-This project is a visually engaging animation of a dynamic cityscape. It includes moving cars, clouds, buildings, a sun, a moon, and even shooting stars! The scene transitions through various times of the day, from sunrise to night, offering a realistic experience of city life.
+This project is a visually engaging animation of a dynamic cityscape, complete with a day-night cycle, moving cars, clouds, buildings, and more. The game offers a realistic and immersive experience.  
 
 ---
 
 ## **Features**  
-1. **Day-Night Cycle**: Watch the sun rise, the day brighten, and the moonlight take over at night.  
-2. **Interactive Sky**: Stars twinkle at night, clouds move across the sky, and the sky colors change dynamically.  
-3. **Moving Elements**:  
-   - **Buildings**: Realistic city buildings, some with clock towers and windows that light up at night.  
-   - **Cars**: Colorful cars drive on the roads in both directions.  
-   - **Shooting Stars**: Occasionally, you'll see a shooting star in the night sky!  
-4. **Interactive Mouse Trail**: Move your mouse to create glowing particle effects.  
-5. **Realistic Shadows**: Shadows cast by buildings change with the time of day.  
+1. **Day-Night Cycle**: The city transitions through sunrise, day, sunset, and night, with realistic sky colors.  
+2. **Dynamic Elements**:  
+   - **Buildings**: Clock towers, illuminated windows, and realistic details.  
+   - **Cars**: Vehicles with headlights and smooth motion.  
+   - **Clouds**: Moving across the sky with changing opacity.  
+   - **Shooting Stars**: Appear occasionally in the night sky.  
+3. **Background Music**: A fitting soundtrack that enhances the atmosphere.  
 
 ---
 
@@ -27,7 +33,7 @@ This project is a visually engaging animation of a dynamic cityscape. It include
 2. **Install Pygame**:  
    Open a terminal or command prompt and type:  
    ```bash
-   pip install pygame
+    pip install pygame PyOpenGL
    ```  
 
 3. **Run the Code**:  
@@ -36,12 +42,12 @@ This project is a visually engaging animation of a dynamic cityscape. It include
      ```bash
      python city_animation.py
      ```  
-
 ---
 
 ## **How to Interact**  
 - **Mouse Interaction**: Move your mouse across the screen to create particle trails.  
 - **Enjoy the Scene**: Watch the city come alive with movement and lighting changes as time progresses.  
+
 
 ---
 
@@ -59,3 +65,10 @@ This project is a visually engaging animation of a dynamic cityscape. It include
 
 --- 
 
+
+## **License**  
+This project is licensed under the MIT License. You are free to use, modify, and distribute this project, provided that you include a copy of the license and credit the original authors.
+
+For more details, see the LICENSE file included in the repository.
+
+---
