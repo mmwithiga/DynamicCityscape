@@ -6,7 +6,6 @@
 3. [Setup Instructions](#setup-instructions)  
 4. [How to Play](#how-to-play)  
 5. [Contributions](#contributions)  
-6. [License](#license)  
 
 ---
 
@@ -65,5 +64,4 @@ This project is a visually engaging animation of a dynamic cityscape, complete w
 
 --- 
 
-## **License**  
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). You are free to use, modify, and distribute this software, provided that the original license is included.
+
