@@ -5,11 +5,17 @@ from datetime import datetime
 
 # Initialize Pygame
 pygame.init()
+pygame.mixer.init()
+
+# Background Music Setup
+pygame.mixer.music.load("relaxing-guitar-loop-v5-245859.mp3")  # Replace with your file name
+pygame.mixer.music.set_volume(0.5)  # Adjust volume (0.0 to 1.0)
+pygame.mixer.music.play(-1)  # Loop indefinitely
 
 # Display setup
-WIDTH, HEIGHT = 1024, 768
+WIDTH, HEIGHT = 1000, 700
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Dynamic City Animation")
+pygame.display.set_caption("Dynamic Sunset, Moonrise, and Cityscape")
 
 # Colors and gradients
 COLORS = {
@@ -21,6 +27,7 @@ COLORS = {
     'dusk': [(20, 24, 82), (44, 58, 121), (255, 89, 89)],
     'night': [(0, 0, 20), (20, 24, 82), (30, 34, 95)]
 }
+
 
 # Star system
 stars = [(random.randint(0, WIDTH), random.randint(0, HEIGHT//2), random.random()*0.8 + 0.2) 
