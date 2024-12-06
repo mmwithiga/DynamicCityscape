@@ -1,66 +1,74 @@
-# Dynamic Sunset Cityscape
-This project is a Pygame-based animated cityscape that simulates a sunset scene with dynamic elements. It includes a transitioning sky color, a setting sun, moving buildings, and a car cruising across the scene. The animation creates a smooth and visually appealing depiction of a sunset in a bustling city.
+# **Dynamic City Animation**  
 
-## Features
-- Gradient Sky Transition: The sky color changes through four stages, from daylight to twilight, based on the sun's position.
-- Setting Sun Animation: The sun gradually moves downward, simulating a sunset.
-- Procedurally Generated Buildings: Buildings of random heights and widths scroll across the screen to give a dynamic, moving cityscape.
-- Animated Car: A red car continuously drives across the road and wraps around the screen when it reaches the edge.
-- Smooth 60 FPS Animation: The animation maintains a smooth framerate for a realistic feel.
-  
-## Requirements
-- Python 3.x
-- Pygame library
-To install Pygame, run:
+## **Table of Contents**  
+1. [Overview](#overview)  
+2. [Features](#features)  
+3. [Setup Instructions](#setup-instructions)  
+4. [How to Play](#how-to-play)  
+5. [Contributions](#contributions)  
+6. [License](#license)  
 
-` bash
-Copy code
-pip install pygame
-`
+---
 
-## Code Structure
-### Main Components
-- Sky Transition: The draw_sky function creates a gradient effect for the sky by interpolating between two colors based on the sun’s height.
-- Sun Animation: The draw_sun function draws a descending sun, representing the sunset.
-- Building Generation: The draw_buildings function creates buildings with randomized heights and widths, as well as organized windows.
-- Car Animation: The draw_car function animates a Lamborghini-style car that moves across the screen, giving a lively touch to the scene.
-  
-### Key Variables
-- `WIDTH, HEIGHT`: Screen dimensions.
-- `SKY_COLORS`: Preset color stages for the sky as the sun descends.
-- `car_speed`: Speed of the car moving across the road.
+## **Overview**  
+This project is a visually engaging animation of a dynamic cityscape, complete with a day-night cycle, moving cars, clouds, buildings, and more. The game offers a realistic and immersive experience.  
 
-## How It Works
-- Initialize Pygame and set up the display.
-- Main Loop:
-Event handling to allow closing the window.
-Update the sun’s position and switch sky color stages based on its height.
-Draw the sky, sun, buildings, road, and car in each frame.
-- Animation Update: Moves buildings and car position each frame to create a continuous animation.
-- Repeat until the user closes the window.
+---
 
-## Customization
-We experimented with:
+## **Features**  
+1. **Day-Night Cycle**: The city transitions through sunrise, day, sunset, and night, with realistic sky colors.  
+2. **Dynamic Elements**:  
+   - **Buildings**: Clock towers, illuminated windows, and realistic details.  
+   - **Cars**: Vehicles with headlights and smooth motion.  
+   - **Clouds**: Moving across the sky with changing opacity.  
+   - **Shooting Stars**: Appear occasionally in the night sky.  
+3. **Background Music**: A fitting soundtrack that enhances the atmosphere.  
 
-- Sky Colors: Change `SKY_COLORS` to customize the sky's color transitions.
-- Car Speed: Adjust `car_speed` to change how fast the car moves.
-- Building Sizes: Modify building dimensions and spacing to change the cityscape look.
+---
 
+## **How to Run the Project**  
+1. **Install Python**:  
+   Make sure you have Python installed on your computer. Download it from [python.org](https://www.python.org).  
 
-## **Project Structure:**
+2. **Install Pygame**:  
+   Open a terminal or command prompt and type:  
+   ```bash
+    pip install pygame PyOpenGL
+   ```  
 
-```
-│   main.py
-│
-├───.idea
-│   │   drawing.py.iml
-│   │   misc.xml
-│   │   modules.xml
-│   │   vcs.xml
-│   │   workspace.xml
-│   │
-│   └───inspectionProfiles
-│           profiles_settings.xml
-```
+3. **Run the Code**:  
+   - Save the code to a file (e.g., `city_animation.py`).  
+   - Open a terminal or command prompt, navigate to the file's location, and type:  
+     ```bash
+     python city_animation.py
+     ```  
+---
+
+## **How to Interact**  
+- **Mouse Interaction**: Move your mouse across the screen to create particle trails.  
+- **Enjoy the Scene**: Watch the city come alive with movement and lighting changes as time progresses.  
 
 
+---
+
+## **What You'll See**  
+- A vibrant city animation with a day-night cycle.  
+- Cars moving on roads and clouds drifting across the sky.  
+- A sun and moon rising and setting.  
+- Shooting stars and illuminated windows in the buildings.  
+
+---
+
+## **Acknowledgments**  
+- This project uses the Pygame library for creating animations.  
+- Special thanks to the group 3 ICS 3C members who collaborated to make this project possible!  
+
+--- 
+
+
+## **License**  
+This project is licensed under the MIT License. You are free to use, modify, and distribute this project, provided that you include a copy of the license and credit the original authors.
+
+For more details, see the LICENSE file included in the repository.
+
+---
